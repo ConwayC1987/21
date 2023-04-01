@@ -1,20 +1,29 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
 import random
-
 # Create a deck of cards
-suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
-values = ['Ace', '2', '3' '4', '5', '6', '7', '8', '9', '10']
-deck = [(suit, value) for suit in suits for value in values]
+deck = []
+# Deck idea from https://www.youtube.com/watch?v=jHjsG2lhUSI
+for suit in ['\u2663', '\u2660', '\u2665', '\u2666']:
+    for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
+        deck.append(rank+suit)
 
-# Shuffle deck
-random.shuffle(deck)
+for x in range(len(deck)):
+    card1 = deck[x]
+    r = random.randint(0, len(deck)-1)
+    card2 = deck[r]
+    deck[x] = card2
+    deck[r] = card1
 
-name = input("Enter your name:")
+for card in deck:
+    print(card, end=' ')
+# Define a player name
+print("Welcome to Blackjack!")
+
+name = input("What is your name? ")
 
 chips = 100
 
-wins = 0
-losses = 0
+winS = 0
+losseS = 0
+
+
 
