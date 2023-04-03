@@ -1,28 +1,5 @@
 import random
 import os
-# Create a deck of cards
-deck = []
-# Deck idea from https://www.youtube.com/watch?v=
-# Unicode characters used for the suits on the cards.
-for suit in ['\u2663', '\u2660', '\u2665', '\u2666']:
-    if suit in ['\u2663', '\u2660']:  # Clubs and Spades are black
-        color = '\033[30m'  # set color to black
-    else:  # Hearts and Diamonds are red
-        color = '\033[31m'  # set color to red
-    for rank in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']:
-        # Joins the rank and card suit using the unicode for visual appeal.
-        # Creates a full deck index 0 to 51.
-        deck.append(color + rank + suit + '\033[0m')  # add color to the cards.
-# For loop to shuffle the deck using the index.
-for x in range(len(deck)):
-    card1 = deck[x]
-    r = random.randint(0, len(deck)-1)
-    card2 = deck[r]
-    deck[x] = card2
-    deck[r] = card1
-
-#for card in deck:
-    #print(card, end=' ')
 
 
 def clear_terminal():
@@ -59,4 +36,28 @@ while True:
     except ValueError:
         print("Invalid input. Please enter a number.")
 
-# Add a class to make the cards
+
+# Define a Deck class to represent a deck of playing cards
+class Deck:
+    # Unicode characters used for the suits on the cards.
+    suits = ['\u2663', '\u2660', '\u2665', '\u2666']
+    rank_names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    
+    def __init__(self):
+        self.deck = []
+        for suit in self.suits:
+            if suit in ['\u2663', '\u2660']:  # Clubs and Spades are black
+                color = '\033[30m'  # set color to black
+            else: 
+                color = '\033[31m'  # set color to red
+            for rank in self.rank_names:
+                # Joins rank and card suit using the unicode for aesthetics.
+                # Creates a full deck index 0 to 51.
+                # Add color to the cards.
+                self.deck.append(color + rank + suit + '\033[0m')
+                
+    def shuffle(self):  # Shuffle deck using random
+        random.shuffle(self.deck)
+
+
+# Define a function to visually represent the cards using ASCII art
